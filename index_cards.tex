@@ -1,0 +1,61 @@
+% peasant multiplication
+
+\documentclass{article}
+\usepackage[pdftex]{graphicx}
+\usepackage{wrapfig}
+
+\setlength{\textheight}{4.75in}
+\setlength{\textwidth}{2.75in}
+\pagestyle{empty}
+\addtolength{\parskip}{+0.3\baselineskip}
+
+\begin{document} \begin{small}
+
+\null \kern -\headheight \kern -\headsep \kern -\topskip \noindent
+  \includegraphics[width=2.75in]{ProgrammingPraxis.png}
+
+\begin{figure}[b]\begin{minipage}{\textwidth}\tiny
+Copyright \copyright 2012 by Programming Praxis.
+All rights reserved.
+See http://programmingpraxis.com for more information.
+\end{minipage}\end{figure}
+
+\begin{center}
+\textbf{Peasant Multiplication}
+\end{center}
+
+When the Egyptians built the pyramids, they in­vented a method for multiplying two numbers using only halving, doubling, and addition. As an example, consider the product $83 \times 97 = 8051$:
+
+\begin{center}
+\begin{tabular}{rrr}
+83 &   97 &   97 \\
+41 &  194 &  194 \\
+20 &  388        \\
+10 &  776        \\
+ 5 & 1552 & 1552 \\
+ 2 & 3104        \\
+ 1 & 6208 & 6208 \\ \cline{3-3}
+   &      & 8051
+\end{tabular}
+\end{center}
+
+The algorithm starts by writing the two numbers to be multiplied at the head of two columns. Then repeatedly halve the number in the left col­umn, ignoring any remainder, and double the number in the right column, writing the new numbers below their predecessors, until the left column reaches one. Finally, in a third column, the number in the second column is copied whenever the number in the first column of the same row is odd, and the numbers in the third column are summed, giving the product. The algorithm works using binary arithmetic: $97 \times 1 + 97 \times 2 + 97 \times 16 + 97 \times 64 = 8051$, where $1 + 2 + 16 + 64 = 83$ correspond to the positions of the odd numbers in the first column.
+
+It is easy to operate the algorithm by hand using piles of pebbles in pairs. It is also easy to pro­gram the algorithm in a binary computer, where halving and doubling are trivial. In fact, in their internal microcode, most modern computers use exactly this algorithm to multiply two numbers.
+
+A program to implement peasant multiplication performs the addition as it goes instead of wait­ing until the end:
+
+\begin{footnotesize}\begin{verbatim}
+function peasant(left, right)
+  prod := 0
+  while (left > 0)
+    if (left is odd)
+      prod := prod + right
+    left := halve(left)
+    right := double(right)
+  return prod
+\end{verbatim}\end{footnotesize}
+
+It is amazing, and humbling, to think that mod­ern computers owe a four-thousand year old debt to those ancient mathematicians.
+
+\end {small} \end{document}

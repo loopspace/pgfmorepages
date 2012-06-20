@@ -1,0 +1,119 @@
+\documentclass{beamer}
+\usepackage{pgfmorepages}
+\setbeameroption{show notes}
+
+\makeatletter
+\defbeamertemplate{note page}{lookahead}
+{%
+  {%
+    \scriptsize
+    \insertvrule{.25\paperheight}{white!90!black}
+    \vskip-.25\paperheight
+    \nointerlineskip
+    \vbox{
+      \hfill\insertslideintonotes{0.25}\hskip0.25\paperwidth\hskip-\Gm@rmargin\hskip0pt%
+      \vskip-0.25\paperheight%
+      \nointerlineskip
+      \begin{pgfpicture}{0cm}{0cm}{0cm}{0cm}
+        \begin{pgflowlevelscope}{\pgftransformrotate{90}}
+          {\pgftransformshift{\pgfpoint{-2cm}{0.2cm}}%
+          \pgftext[base,left]{\footnotesize\the\year-\ifnum\month<10\relax0\fi\the\month-\ifnum\day<10\relax0\fi\the\day}}
+        \end{pgflowlevelscope}
+      \end{pgfpicture}}
+    \nointerlineskip
+    \vbox to .25\paperheight{\vskip0.5em
+      \hbox{\insertshorttitle[width=8cm]}%
+      \setbox\beamer@tempbox=\hbox{\insertsection}%
+      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip4pt\raise3pt\hbox{\vrule
+            width0.4pt height7pt\vrule width 9pt
+            height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsection\end{minipage}}\fi%
+      }%
+      \setbox\beamer@tempbox=\hbox{\insertsubsection}%
+      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip17.4pt\raise3pt\hbox{\vrule
+            width0.4pt height7pt\vrule width 9pt
+            height0.4pt}}\hskip1pt\hbox{\begin{minipage}[t]{7.5cm}\def\breakhere{}\insertsubsection\end{minipage}}\fi%
+      }%
+      \setbox\beamer@tempbox=\hbox{\insertshortframetitle}%
+      \hbox{\ifdim\wd\beamer@tempbox>1pt{\hskip30.8pt\raise3pt\hbox{\vrule
+            width0.4pt height7pt\vrule width 9pt
+            height0.4pt}}\hskip1pt\hbox{\insertshortframetitle[width=7cm]}\fi%
+      }%
+      \vfil}%
+  }%
+  \vskip.25em
+  \nointerlineskip
+  \insertnote
+}
+
+\pgfpagesdeclarelayout{notes page with look ahead}%
+{%
+  \edef\pgfpageoptionheight{\the\paperwidth}
+  \edef\pgfpageoptionwidth{\the\paperheight}
+  \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptioninitialshipout{2}
+}%
+{%
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=3,%
+    physical pages=2,%
+    physical height=\the\paperheight,%
+    physical width=\the\paperwidth,%
+    current logical shipout=2,%
+    last logical shipout=2,%
+  }
+  \pgfpagesphysicalpage{1}%
+  \pgfpageslogicalpageoptions{1}%
+  {
+    resized width=\pgfphysicalwidth,%
+    resized height=\pgfphysicalheight,%
+    border shrink=\pgfpageoptionborder,%
+    center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight}%
+  }%
+  \pgfpageslogicalpageoptions{3}%
+  {
+    resized width=.25\pgfphysicalwidth,%
+    resized height=.25\pgfphysicalheight,%
+    border shrink=\pgfpageoptionborder,%
+    center=\pgfpoint{.875\pgfphysicalwidth}{.875\pgfphysicalheight},%
+    border code={\color[gray]{0.8}\pgfusepath{stroke}},%
+    skip code={%
+      \setbox\csname pgfpages@box@3\endcsname=\copy\beamer@frameboxcopy
+      \skiptrue}
+  }
+  \pgfpagesphysicalpage{2}%
+  \pgfpageslogicalpageoptions{2}%
+  {
+    resized width=\pgfphysicalwidth,%
+    resized height=\pgfphysicalheight,%
+    border shrink=\pgfpageoptionborder,%
+    center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight}%
+  }%
+}
+\makeatother
+\setbeamertemplate{note page}[lookahead]
+\pgfpagesuselayout{notes page with look ahead}
+
+\begin{document}
+\begin{frame}{The first frame}
+\begin{enumerate}
+\item An item
+\note[item]{with a note}
+\item Another item
+\note[item]{with another note}
+\end{enumerate}
+\vfill
+Something near the bottom
+\end{frame}
+\begin{frame}{The second frame}
+\begin{enumerate}
+\item An item
+\note[item]{with a note}
+\item Another item
+\note[item]{with another note}
+\end{enumerate}
+\vfill
+Something near the bottom
+\end{frame}
+\end{document}
