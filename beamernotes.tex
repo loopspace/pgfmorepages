@@ -63,7 +63,9 @@
     current logical shipout=2,%
     last logical shipout=2,%
   }
-  \pgfpagesphysicalpage{1}%
+  \pgfpagesphysicalpage{1}{%
+    skip code={\ifnum\the\pgfactualpage=1\relax\pgfpagesshipfalse\fi}
+  }%
   \pgfpageslogicalpageoptions{1}%
   {
     resized width=\pgfphysicalwidth,%
@@ -79,10 +81,13 @@
     center=\pgfpoint{.875\pgfphysicalwidth}{.875\pgfphysicalheight},%
     border code={\color[gray]{0.8}\pgfusepath{stroke}},%
     skip code={%
-      \setbox\csname pgfpages@box@3\endcsname=\copy\beamer@frameboxcopy
-      \skiptrue}
+      \ifvoid\csname pgfpages@box@2\endcsname\else
+      \setbox\csname pgfpages@box@3\endcsname=\copy\beamer@frameboxcopy\fi
+      }
   }
-  \pgfpagesphysicalpage{2}%
+  \pgfpagesphysicalpage{2}{%
+    skip code={\ifvoid\csname pgfpages@box@2\endcsname\pgfpagesshipfalse\fi}%
+  }%
   \pgfpageslogicalpageoptions{2}%
   {
     resized width=\pgfphysicalwidth,%
@@ -107,6 +112,26 @@
 Something near the bottom
 \end{frame}
 \begin{frame}{The second frame}
+\begin{enumerate}
+\item An item
+\note[item]{with a note}
+\item Another item
+\note[item]{with another note}
+\end{enumerate}
+\vfill
+Something near the bottom
+\end{frame}
+\begin{frame}{The third frame}
+\begin{enumerate}
+\item An item
+\note[item]{with a note}
+\item Another item
+\note[item]{with another note}
+\end{enumerate}
+\vfill
+Something near the bottom
+\end{frame}
+\begin{frame}{The fourth frame}
 \begin{enumerate}
 \item An item
 \note[item]{with a note}

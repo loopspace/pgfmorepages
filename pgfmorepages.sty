@@ -23,10 +23,13 @@
 \newcount\pgf@lastshipout
 \newcount\pgf@currentshipout
 \newcount\pgf@cpn
+\newcount\pgf@clpn
 \newcount\pgf@cppn
+\newcount\pgfactualpage
 \newcount\pgf@shipoutnextto
 \newdimen\pgfphysicalheight
 \newdimen\pgfphysicalwidth
+\newif\ifpgfpagesship
 
 \pgf@shipoutnextto=0\relax
 \pgf@logicalpages=0\relax
@@ -36,6 +39,7 @@
 \pgf@currentshipout=1\relax
 \pgfphysicalheight=\paperheight
 \pgfphysicalwidth=\paperwidth
+\pgfactualpage=0
 \def\pgf@currentpage{1}
 
 \newif\ifpgfphysicalpageempty
@@ -626,7 +630,7 @@
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -641,7 +645,7 @@
       resized height=\pgfphysicalheight,%
       center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{2}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -658,7 +662,7 @@
     }%
   \else
     % stack on top of one another
-  \pgfpagesphysicalpage{1}%
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -673,7 +677,7 @@
       resized height=.5\pgfphysicalheight,%
       center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{2}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -709,7 +713,7 @@
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -724,7 +728,7 @@
       resized height=\pgfphysicalheight,%
       center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{2}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -741,7 +745,7 @@
     }%
   \else
     % stack on top of one another
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -756,7 +760,7 @@
       resized height=.5\pgfphysicalheight,%
       center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{2}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -792,7 +796,7 @@
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{4}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -800,7 +804,7 @@
       resized height=\pgfphysicalheight,%
       center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{3}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -815,7 +819,7 @@
       resized height=\pgfphysicalheight,%
       center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -825,7 +829,7 @@
     }%
   \else
     % stack on top of one another
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{4}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -833,7 +837,7 @@
       resized height=.5\pgfphysicalheight,%
       center=\pgfpoint{.5\pgfphysicalwidth}{.75\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{3}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -848,7 +852,7 @@
       resized height=.5\pgfphysicalheight,%
       center=\pgfpoint{.5\pgfphysicalwidth}{.75\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -857,6 +861,178 @@
       center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
     }%
   \fi    
+}
+
+\pgfpagesdeclarelayout{8 on 4, book format}%
+{%
+  \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
+  \edef\pgfpageoptionwidth{\the\paperheight}
+  \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionfirstshipout{1}
+}%
+{%
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=8,%
+    physical pages=4,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth,%
+    current logical shipout=\pgfpageoptionfirstshipout%
+  }
+%  \ifdim\paperheight>\paperwidth\relax
+    % put side-by-side
+  \pgfpagesphysicalpage{1}{}
+    \pgfpageslogicalpageoptions{8}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{2}{}
+    \pgfpageslogicalpageoptions{7}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{2}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{1}{}
+    \pgfpageslogicalpageoptions{1}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{3}{}
+    \pgfpageslogicalpageoptions{6}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{4}{}
+    \pgfpageslogicalpageoptions{5}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{4}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{3}{}
+    \pgfpageslogicalpageoptions{3}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+%  \else
+    % stack on top of one another
+%  \fi    
+}
+
+\pgfpagesdeclarelayout{8 on 4, book format, reverse second, single sided}%
+{%
+  \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
+  \edef\pgfpageoptionwidth{\the\paperheight}
+  \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionfirstshipout{1}
+}%
+{%
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=8,%
+    physical pages=4,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth,%
+    current logical shipout=\pgfpageoptionfirstshipout%
+  }
+%  \ifdim\paperheight>\paperwidth\relax
+    % put side-by-side
+  \pgfpagesphysicalpage{1}{}
+    \pgfpageslogicalpageoptions{8}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{1}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{4}{}
+    \pgfpageslogicalpageoptions{7}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=180%
+    }%
+    \pgfpageslogicalpageoptions{2}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=180%
+    }%
+  \pgfpagesphysicalpage{2}{}
+    \pgfpageslogicalpageoptions{6}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{3}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
+    }%
+  \pgfpagesphysicalpage{3}{}
+    \pgfpageslogicalpageoptions{5}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=180%
+    }%
+    \pgfpageslogicalpageoptions{4}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.5\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=180%
+    }%
+%  \else
+    % stack on top of one another
+%  \fi    
 }
 
 
@@ -882,7 +1058,7 @@
     resized height=\the\paperheight,%
     border code=\pgfusepath{draw}
   }
-  \pgfpagesphysicalpage{1}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
     {%
       center=\pgfpoint{.5\paperwidth}{.75*\pgfphysicalheight},%
@@ -906,7 +1082,7 @@
       rotation=90,%
       center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{.5\paperheight},%
     }%
-  \pgfpagesphysicalpage{2}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{2}
     {%
       center=\pgfpoint{\pgfphysicalwidth - .5\paperwidth}{.75\pgfphysicalheight},%
@@ -1018,25 +1194,23 @@
   \ifpgfutil@in@
   \pgf@mp@seplp#1\relax
   \else
-  \pgf@cpn=#1\relax%
+  \pgf@clpn=#1\relax%
   \pgf@cppn=\pgf@currentpage\relax%
   \fi
 % Make sure we have the box for this logical page.
-  \expandafter\ifx\csname pgfpages@box@\the\pgf@cpn\endcsname\relax%
-    \expandafter\newbox\csname pgfpages@box@\the\pgf@cpn\endcsname%
+  \expandafter\ifx\csname pgfpages@box@\the\pgf@clpn\endcsname\relax%
+    \expandafter\newbox\csname pgfpages@box@\the\pgf@clpn\endcsname%
+\pgf@elpsetcurrent{height}{\the\paperheight}%
+\pgf@elpsetcurrent{width}{\the\paperwidth}%
 \fi
-% Now save the logical page number and change the count \pgf@cpn so that it is the number of logical pages on this particular physical page.
-      \edef\pgf@temp{\the\pgf@cpn}%
+% Now set the count \pgf@cpn so that it is the number of logical pages on this particular physical page.
       \expandafter\ifx\csname pgf@lpageson@\the\pgf@cppn\endcsname\relax
 \expandafter\def\csname pgf@lpageson@\the\pgf@cppn\endcsname{1}%
 \else
 \expandafter\edef\csname pgf@lpageson@\the\pgf@cppn\endcsname{\number\numexpr\csname pgf@lpageson@\the\pgf@cppn\endcsname + 1\relax}%
 \fi
       \pgf@cpn=\numexpr\csname pgf@lpageson@\the\pgf@cppn\endcsname\relax
-\pgf@epsetcurrent{height}{\the\paperheight}%
-\pgf@epsetcurrent{width}{\the\paperwidth}%
-\pgf@epsetcurrent{logicalpage}{\pgf@temp}%
-  \pgf@psetcurrent{skipcode}{\iftrue}%
+\pgf@epsetcurrent{logicalpage}{\the\pgf@clpn}%
 \pgfpages@processdefaults
   \setkeys{pgfpages@page}{#2}%
   \pgf@calculateresizes{height}%
@@ -1050,8 +1224,11 @@
 }
 
 % Set the current default physical page for the logical page options
-\newcommand\pgfpagesphysicalpage[1]{%
-      \edef\pgf@currentpage{#1}}
+\newcommand\pgfpagesphysicalpage[2]{%
+      \edef\pgf@currentpage{#1}%
+      \pgf@cppn=#1\relax
+      \setkeys{pgfpages@ppage}{#2}%
+}
 
 % Set some defaults
 \newcommand\pgfpagessetdefaults[1]{%
@@ -1063,35 +1240,47 @@
       \expandafter\pgf@temp\expandafter{\pgf@defaults}%
 }
 
-\def\skiptrue{\iftrue}
-\def\skipfalse{\iffalse}
-
-
+% Set and get options for a particular logical page on a particular physical page.
 \def\pgf@epset#1#2#3#4{\expandafter\edef\csname pgfpages@p@#1@#2@#3\endcsname{#4}}
-\def\pgf@epsetcurrent#1#2{\pgf@epset{\the\pgf@cpn}{\the\pgf@cppn}{#1}{#2}}
-\def\pgf@epsetall#1#2#3{\expandafter\edef\csname pgfpages@p@#1@#2\endcsname{#3}}
-\def\pgf@epsetcurrentall#1#2{\pgf@epsetall{\the\pgf@cpn}{#1}{#2}}
 \def\pgf@pset#1#2#3#4{\expandafter\def\csname pgfpages@p@#1@#2@#3\endcsname{#4}}
 \def\pgf@pget#1#2#3{\csname pgfpages@p@#1@#2@#3\endcsname}
-\def\pgf@psetall#1#2#3{\expandafter\def\csname pgfpages@p@#1@#2\endcsname{#3}}
-\def\pgf@psetcurrentall#1#2{\pgf@psetall{\the\pgf@cpn}{#1}{#2}}
+\def\pgf@epsetcurrent#1#2{\pgf@epset{\the\pgf@cpn}{\the\pgf@cppn}{#1}{#2}}
 \def\pgf@psetcurrent#1#2{\pgf@pset{\the\pgf@cpn}{\the\pgf@cppn}{#1}{#2}}
 \def\pgf@pgetcurrent#1{\pgf@pget{\the\pgf@cpn}{\the\pgf@cppn}{#1}}
+
+% Set and get options for a particular logical page.
+\def\pgf@elpset#1#2#3{\expandafter\edef\csname pgfpages@lp@#1@#2\endcsname{#3}}
+\def\pgf@lpset#1#2#3{\expandafter\def\csname pgfpages@lp@#1@#2\endcsname{#3}}
+\def\pgf@lpget#1#2{\csname pgfpages@lp@#1@#2\endcsname}
+\def\pgf@elpsetcurrent#1#2{\pgf@elpset{\the\pgf@clpn}{#1}{#2}}
+\def\pgf@lpsetcurrent#1#2{\pgf@lpset{\the\pgf@clpn}{#1}{#2}}
+\def\pgf@lpgetcurrent#1{\pgf@lpget{\the\pgf@clpn}{#1}}
+
+% Set and get options for a particular physical page.
+\def\pgf@eppset#1#2#3{\expandafter\edef\csname pgfpages@pp@#1@#2\endcsname{#3}}
+\def\pgf@ppset#1#2#3{\expandafter\def\csname pgfpages@pp@#1@#2\endcsname{#3}}
+\def\pgf@ppget#1#2{\csname pgfpages@pp@#1@#2\endcsname}
+\def\pgf@eppsetcurrent#1#2{\pgf@eppset{\the\pgf@cppn}{#1}{#2}}
+\def\pgf@ppsetcurrent#1#2{\pgf@ppset{\the\pgf@cppn}{#1}{#2}}
+\def\pgf@ppgetcurrent#1{\pgf@ppget{\the\pgf@cppn}{#1}}
 
 \define@key{pgfpages@page}{skip code}{\pgf@psetcurrent{skipcode}{#1}}
 \define@key{pgfpages@page}{scale}{\pgf@epsetcurrent{scale}{#1}}
 \define@key{pgfpages@page}{xscale}{\pgf@epsetcurrent{xscale}{#1}}
 \define@key{pgfpages@page}{yscale}{\pgf@epsetcurrent{yscale}{#1}}
-\define@key{pgfpages@page}{original height}{\pgf@epsetcurrent{height}{#1}}
-\define@key{pgfpages@page}{original width}{\pgf@epsetcurrent{width}{#1}}
+\define@key{pgfpages@page}{original height}{\pgf@elpsetcurrent{height}{#1}}
+\define@key{pgfpages@page}{original width}{\pgf@elpsetcurrent{width}{#1}}
 \define@key{pgfpages@page}{resized height}{\pgf@epsetcurrent{reheight}{#1}}
 \define@key{pgfpages@page}{resized width}{\pgf@epsetcurrent{rewidth}{#1}}
 \define@key{pgfpages@page}{center}{\pgf@psetcurrent{center}{#1}}
 \define@key{pgfpages@page}{rotation}{\pgf@epsetcurrent{rotation}{#1}}
-\define@key{pgfpages@page}{copy from}{\pgf@epsetcurrentall{copy}{#1}}
+\define@key{pgfpages@page}{copy from}{\pgf@elpsetcurrent{copy}{#1}}
 \define@key{pgfpages@page}{border shrink}{\pgf@epsetcurrent{border}{#1}}
 \define@key{pgfpages@page}{border code}{\pgf@psetcurrent{bordercode}{#1}}
 \define@key{pgfpages@page}{corner width}{\pgf@psetcurrent{cornerwidth}{#1}}
+
+\define@key{pgfpages@ppage}{skip code}{\pgf@ppsetcurrent{skipcode}{#1}}
+\define@key{pgfpages@ppage}{defaults}{\pgfpagessetdefaults{#1}}
 
 \def\pgf@calculateresizes#1{%
   \expandafter\ifx\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @re#1\endcsname\relax%
@@ -1102,7 +1291,7 @@
       \expandafter\pgfutil@tempdimb\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @border\endcsname\relax%
       \advance\pgfutil@tempdima by-2\pgfutil@tempdimb\relax%
     \fi%
-    \expandafter\pgfutil@tempdimb\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @#1\endcsname\relax%
+    \expandafter\pgfutil@tempdimb\csname pgfpages@lp@\the\pgf@clpn @#1\endcsname\relax%
     \pgfutil@tempcnta=\pgfutil@tempdimb%
     \divide\pgfutil@tempcnta by 65536\relax%
     \ifnum\pgfutil@tempcnta=0\relax%
@@ -1134,8 +1323,13 @@
   \ifnum\pgf@logicalpages>0\relax%
   \pgf@cppn=1\relax%
   \loop%
+  \global\advance\pgfactualpage by 1\relax
+      \pgfpagesshiptrue
+  \csname pgfpages@pp@\the\pgf@cppn @skipcode\endcsname
+      \ifpgfpagesship
     \pgfpages@buildshipoutbox%
     \pgfpages@shipoutshipoutbox%
+      \fi
   \ifnum\pgf@cppn<\pgf@physicalpages%
   \advance \pgf@cppn by 1\relax
   \repeat%
@@ -1154,13 +1348,15 @@
     \pgfsys@beginpicture%
     \pgf@cpn=1\relax%
     \loop%
+      \pgfpagesshiptrue
           \csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @skipcode\endcsname
-          \edef\pgf@lpage{\pgf@pgetcurrent{logicalpage}}%
-      \setbox0=\hbox to \csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @width\endcsname{%
+\ifpgfpagesship
+\pgf@clpn=\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @logicalpage\endcsname\relax%
+      \setbox0=\hbox to \csname pgfpages@lp@\the\pgf@clpn @width\endcsname{%
         \hskip1in%
-        \vbox to \csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @height\endcsname%
+        \vbox to \csname pgfpages@lp@\the\pgf@clpn @height\endcsname%
           {\vskip1in\offinterlineskip\expandafter\copy\csname
-            pgfpages@box@\pgf@lpage\endcsname\vss}\hss}%
+            pgfpages@box@\the\pgf@clpn\endcsname\vss}\hss}%
       \pgfsys@beginscope%
         % Translate lower left corner
         \expandafter\ifx\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @center\endcsname\relax%
@@ -1184,8 +1380,8 @@
         \else%
           \pgflowlevel{\pgftransformrotate{\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @rotation\endcsname}}%
         \fi%
-        \pgfutil@tempdima=\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @width\endcsname\relax%
-        \pgfutil@tempdimb=\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @height\endcsname\relax%
+        \pgfutil@tempdima=\csname pgfpages@lp@\the\pgf@clpn @width\endcsname\relax%
+        \pgfutil@tempdimb=\csname pgfpages@lp@\the\pgf@clpn @height\endcsname\relax%
         \pgflowlevel{\pgftransformshift{\pgfpoint{-.5\pgfutil@tempdima}{-.5\pgfutil@tempdimb}}}%
         \expandafter\ifx\csname pgfpages@p@\the\pgf@cpn @\the\pgf@cppn @bordercode\endcsname\relax%
         \else%
@@ -1254,26 +1450,26 @@
 }
 
 \def\pgfpages@performcopying{
-  \pgf@cpn=1\relax% copy first
+  \pgf@clpn=1\relax% copy first
   \loop%
-    \expandafter\ifx\csname pgfpages@p@\the\pgf@cpn @copy\endcsname\relax
+    \expandafter\ifx\csname pgfpages@lp@\the\pgf@clpn @copy\endcsname\relax
     \else%
       \edef\pgf@temp{\noexpand\global\noexpand\setbox\csname pgfpages@box@%
-        \the\pgf@cpn\endcsname=\noexpand\copy\csname pgfpages@box@\csname
-        pgfpages@p@\the\pgf@cpn @copy\endcsname\endcsname}%
+        \the\pgf@clpn\endcsname=\noexpand\copy\csname pgfpages@box@\csname
+        pgfpages@lp@\the\pgf@clpn @copy\endcsname\endcsname}%
       \pgf@temp%
     \fi%
-  \ifnum\pgf@cpn<\pgf@logicalpages%
-    \advance \pgf@cpn by 1\relax%  
+  \ifnum\pgf@clpn<\pgf@logicalpages%
+    \advance \pgf@clpn by 1\relax%  
   \repeat%
-  \pgf@cpn=1\relax% then void
+  \pgf@clpn=1\relax% then void
   \loop%
-    \expandafter\ifx\csname pgfpages@p@\the\pgf@cpn @copy\endcsname\relax
-      \expandafter\global\expandafter\setbox\csname pgfpages@box@\the\pgf@cpn\endcsname=\box\voidb@x%
+    \expandafter\ifx\csname pgfpages@lp@\the\pgf@clpn @copy\endcsname\relax
+      \expandafter\global\expandafter\setbox\csname pgfpages@box@\the\pgf@clpn\endcsname=\box\voidb@x%
     \else%
     \fi%
-  \ifnum\pgf@cpn<\pgf@logicalpages%
-    \advance \pgf@cpn by 1\relax%  
+  \ifnum\pgf@clpn<\pgf@logicalpages%
+    \advance \pgf@clpn by 1\relax%  
   \repeat%
 }
 
