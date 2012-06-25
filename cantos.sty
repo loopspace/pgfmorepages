@@ -1,0 +1,23 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{cantos}[2012/03/01 Folheto de cantos]
+
+\RequirePackage{lmodern}
+\RequirePackage{lettrine}
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+\RequirePackage{multicol}
+
+\RequirePackage[parfill]{parskip}
+
+\newcounter{mysongscounter}
+\setcounter{mysongscounter}{1}
+
+\NewDocumentEnvironment{canto}{}{\ifnum\value{mysongscounter}=1 \hrule\vspace{1ex}\fi\lettrine[lines=2]{\textcolor{gray!90}{\bfseries\ifnum\value{mysongscounter}<10 0\fi\arabic{mysongscounter}}}{}}{\stepcounter{mysongscounter}\vspace{2ex}\hrule\vspace{1ex}}%
+
+\NewDocumentEnvironment{cantos}{O{2}}{\begin{multicols}{#1}}{\end{multicols}}
+
+\newcommand{\folheto}[1]{\begin{center}%
+\bfseries\huge #1%
+\end{center}}
+
+\newcommand{\rep}[1]{($\times$#1)}
