@@ -81,7 +81,7 @@
   \csname pgfpages@layoutbefore@#1\endcsname
   \setkeys{pgfpagesuselayoutoption}{#2}
   \pgfutil@ifundefined{pgfpages@layout@#1}{
-    \PackageError{pgfpages}{Page layout `#1' undefined.}{}
+    \PackageError{pgfmorepages}{Page layout `#1' undefined.}{}
   }
   {
     \csname pgfpages@layout@#1\endcsname
@@ -1355,7 +1355,7 @@
       \setbox0=\hbox to \csname pgfpages@lp@\the\pgf@clpn @width\endcsname{%
         \hskip1in%
         \vbox to \csname pgfpages@lp@\the\pgf@clpn @height\endcsname%
-          {\vskip1in\offinterlineskip\expandafter\copy\csname
+          {\vskip1in\offinterlineskip \expandafter\copy\csname
             pgfpages@box@\the\pgf@clpn\endcsname\vss}\hss}%
       \pgfsys@beginscope%
         % Translate lower left corner
@@ -1402,25 +1402,25 @@
             \pgfpathrectangle{\pgfpoint{\wd0-\pgfutil@tempdima}{0pt}}{\pgfpoint{\pgfutil@tempdima}{\pgfutil@tempdima}}%
             \pgfpathrectangle{\pgfpoint{\wd0-\pgfutil@tempdima}{\ht0-\pgfutil@tempdima}}{\pgfpoint{\pgfutil@tempdima}{\pgfutil@tempdima}}%
             \pgfusepath{fill}%
-            \pgfpathmoveto{\pgfpoint{0pt}{\pgfutil@tempdima}}
-            \pgfpathcurveto{\pgfpoint{0pt}{0.555\pgfutil@tempdima}}{\pgfpoint{.555\pgfutil@tempdima}{0pt}}{\pgfpoint{\pgfutil@tempdima}{0pt}}
-            \pgfpathlineto{\pgfpoint{\wd0-\pgfutil@tempdima}{0pt}}
-            \pgfpathcurveto{\pgfpoint{\wd0-.555\pgfutil@tempdima}{0pt}}{\pgfpoint{\wd0}{.555\pgfutil@tempdima}}{\pgfpoint{\wd0}{\pgfutil@tempdima}}
-            \pgfpathlineto{\pgfpoint{\wd0}{\ht0-\pgfutil@tempdima}}
-            \pgfpathcurveto{\pgfpoint{\wd0}{\ht0-.555\pgfutil@tempdima}}{\pgfpoint{\wd0-.555\pgfutil@tempdima}{\ht0}}{\pgfpoint{\wd0-\pgfutil@tempdima}{\ht0}}
-            \pgfpathlineto{\pgfpoint{\pgfutil@tempdima}{\ht0}}
-            \pgfpathcurveto{\pgfpoint{.555\pgfutil@tempdima}{\ht0}}{\pgfpoint{0pt}{\ht0-.555\pgfutil@tempdima}}{\pgfpoint{0pt}{\ht0-\pgfutil@tempdima}}
+            \pgfpathmoveto{\pgfpoint{0pt}{\pgfutil@tempdima}}%
+            \pgfpathcurveto{\pgfpoint{0pt}{0.555\pgfutil@tempdima}}{\pgfpoint{.555\pgfutil@tempdima}{0pt}}{\pgfpoint{\pgfutil@tempdima}{0pt}}%
+            \pgfpathlineto{\pgfpoint{\wd0-\pgfutil@tempdima}{0pt}}%
+            \pgfpathcurveto{\pgfpoint{\wd0-.555\pgfutil@tempdima}{0pt}}{\pgfpoint{\wd0}{.555\pgfutil@tempdima}}{\pgfpoint{\wd0}{\pgfutil@tempdima}}%
+            \pgfpathlineto{\pgfpoint{\wd0}{\ht0-\pgfutil@tempdima}}%
+            \pgfpathcurveto{\pgfpoint{\wd0}{\ht0-.555\pgfutil@tempdima}}{\pgfpoint{\wd0-.555\pgfutil@tempdima}{\ht0}}{\pgfpoint{\wd0-\pgfutil@tempdima}{\ht0}}%
+            \pgfpathlineto{\pgfpoint{\pgfutil@tempdima}{\ht0}}%
+            \pgfpathcurveto{\pgfpoint{.555\pgfutil@tempdima}{\ht0}}{\pgfpoint{0pt}{\ht0-.555\pgfutil@tempdima}}{\pgfpoint{0pt}{\ht0-\pgfutil@tempdima}}%
             \pgfpathclose
-            \pgfusepath{clip}
-            \color{white}
-            \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\wd0}{\ht0}}
-            \pgfusepath{fill}
-          }
+            \pgfusepath{clip}%
+            \color{white}%
+            \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{\wd0}{\ht0}}%
+            \pgfusepath{fill}%
+          }%
         \fi%
         \ht0=0pt%
         \wd0=0pt%
         \dp0=0pt%
-        \pgfsys@hbox0%
+          \pgfsys@hbox0%
 %        \endpgfscope%
       \pgfsys@endscope%
     \fi
@@ -1484,6 +1484,10 @@
 \newcommand\pgfhookintoshipout{
   \let\pgfpages@originalshipout=\shipout
   \let\shipout=\pgfpages@interceptshipout
+}
+
+\newcommand\pgfremovehookintoshipout{
+  \let\shipout=\pgfpages@originalshipout
 }
 
 \def\pgfpages@interceptshipout{%
