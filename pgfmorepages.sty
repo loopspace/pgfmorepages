@@ -81,13 +81,46 @@
   \csname pgfpages@layoutbefore@#1\endcsname
   \setkeys{pgfpagesuselayoutoption}{#2}
   \pgfutil@ifundefined{pgfpages@layout@#1}{
-    \PackageError{pgfmorepages}{Page layout `#1' undefined.}{}
+    \PackageError{pgfpages}{Page layout `#1' undefined.}{}
   }
   {
+    \pgfpages@reset
     \csname pgfpages@layout@#1\endcsname
   }
 }
 
+\def\pgfpages@reset{
+\pgfshipoutphysicalpage
+\pgfphysicalheight=\paperheight
+\pgfphysicalwidth=\paperwidth
+  \pgf@cppn=1\relax%
+  \loop%
+    \expandafter\let\csname pgf@lpageson@\the\pgf@cppn\endcsname=\relax
+    \advance \pgf@cppn by 1\relax%  
+   \expandafter\unless\expandafter\ifx\csname pgf@lpageson@\the\pgf@cppn\endcsname\relax%
+  \repeat%
+  \pgf@clpn=1\relax%
+  \loop%
+    \expandafter\let\csname pgfpages@box@\the\pgf@clpn\endcsname=\relax
+    \advance \pgf@clpn by 1\relax%  
+   \expandafter\unless\expandafter\ifx\csname pgfpages@box@\the\pgf@clpn\endcsname\relax%
+  \repeat%
+  \pgf@cppn=1\relax%
+  \pgf@clpn=1\relax%
+  \loop%
+    \loop%
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @reheight\endcsname\relax
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @rewidth\endcsname\relax
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @border\endcsname\relax
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @scale\endcsname\relax%
+      \advance\pgf@clpn by 1\relax
+   \expandafter\unless\expandafter\ifx\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @reheight\endcsname\relax
+   \repeat
+   \pgf@clpn=1\relax%
+   \advance\pgf@cppn by 1\relax
+   \expandafter\unless\expandafter\ifx\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @reheight\endcsname\relax
+   \repeat
+}
 
 % Predefined options
 
@@ -1484,10 +1517,6 @@
 \newcommand\pgfhookintoshipout{
   \let\pgfpages@originalshipout=\shipout
   \let\shipout=\pgfpages@interceptshipout
-}
-
-\newcommand\pgfremovehookintoshipout{
-  \let\shipout=\pgfpages@originalshipout
 }
 
 \def\pgfpages@interceptshipout{%
