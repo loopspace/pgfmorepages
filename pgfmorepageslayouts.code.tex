@@ -47,8 +47,8 @@
 
 \pgfpagesdeclarelayout{repeated 2-up}%
 {%
-  \edef\pgfpageoptionheight{\the\paperwidth}
-  \edef\pgfpageoptionwidth{\the\paperheight}
+  \edef\pgfpageoptionheight{\the\paperheight}
+  \edef\pgfpageoptionwidth{\the\paperwidth}
   \def\pgfpageoptionborder{0pt}
   \def\pgfpageoptionfirstshipout{1}
 }%
@@ -64,18 +64,20 @@
   \pgfpagessetdefaults
   {%
     border shrink=\pgfpageoptionborder,%
-    resized width=.5\pgfphysicalwidth,%
-    resized height=\pgfphysicalheight,%
+    resized width=.5\pgfphysicalheight,%
+    resized height=\pgfphysicalwidth,%
 %    border code=\pgfusepath{draw}
   }
   \pgfpagesphysicalpage{1}{}
   \pgfpageslogicalpageoptions{1}
   {%
-    center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight},
+    center=\pgfpoint{.5\pgfphysicalwidth}{.75\pgfphysicalheight},%
+    rotation=90,%
   }
   \pgfpageslogicalpageoptions{1}
   {%
-    center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight},
+    center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight},%
+    rotation=90,%
   }
 }
 
@@ -143,6 +145,7 @@
       border shrink=\pgfpageoptionborder,%
       resized width=\pgfphysicalwidth,%
       resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight}%
+      center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=0
     }%
 }
