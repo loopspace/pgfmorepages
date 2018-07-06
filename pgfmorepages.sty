@@ -1648,6 +1648,10 @@
       \ifx\filename@base\reserved@a
         \mediawidth\pgfphysicalwidth\mediaheight\pgfphysicalheight%
       \fi%
+      \def\reserved@a{luatex}%
+      \ifx\filename@base\reserved@a
+        \pagewidth\pgfphysicalwidth\pageheight\pgfphysicalheight%
+      \fi%
     \fi
 }
 
