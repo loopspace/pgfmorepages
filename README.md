@@ -104,3 +104,27 @@ These are loaded via the command
 * `repeated 4-up`
 * `1 on 1`
 
+(NB `1 repeated 4 times on 1` and `repeated 4-up` appear to do the
+same thing.  They were defined at different times and are implemented
+slightly differently so I can't be *absolutely* sure.)
+
+# Examples
+
+1. Use `resize to` to enlarge a page.
+
+    ~~~
+	\documentclass{article}
+	\usepackage[a6paper]{geometry}
+	\usepackage{pgfmorepages}
+	\pgfpagesuselayout{resize to}[a4paper]
+	~~~
+	
+2. Repeat a page multiple times for printing (with enlarging).
+
+    ~~~
+	\documentclass{article}
+	\usepackage[a6paper]{geometry}
+	\usepackage{pgfmorepages}
+	\pgfmorepagesloadextralayouts
+	\pgfpagesuselayout{repeated 4-up}[a4paper]
+	~~~
