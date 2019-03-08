@@ -1,7 +1,7 @@
 This code extends code originally due to Till Tantau.  The licensing therefore matches that of the original:
 
 Original code copyright 2006 by Till Tantau
-Extension copyright 2012 by Andrew Stacey
+Extension copyright 2012-2019 by Andrew Stacey
 
 This package may be distributed and/or modified
 
