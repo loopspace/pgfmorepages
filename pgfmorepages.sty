@@ -78,13 +78,13 @@
 
 \def\pgfpagesuselayout#1{\pgfutil@ifnextchar[{\pgf@pagelayout{#1}}{\pgf@pagelayout{#1}[]}}
 \def\pgf@pagelayout#1[#2]{
-  \csname pgfpages@layoutbefore@#1\endcsname
-  \setkeys{pgfpagesuselayoutoption}{#2}
   \pgfutil@ifundefined{pgfpages@layout@#1}{
     \PackageError{pgfpages}{Page layout `#1' undefined.}{}
   }
   {
     \pgfpages@reset
+    \csname pgfpages@layoutbefore@#1\endcsname
+    \setkeys{pgfpagesuselayoutoption}{#2}
     \csname pgfpages@layout@#1\endcsname
   }
 }
@@ -113,6 +113,7 @@
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @rewidth\endcsname\relax
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @border\endcsname\relax
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @scale\endcsname\relax%
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @rotation\endcsname\relax%
       \advance\pgf@clpn by 1\relax
    \expandafter\unless\expandafter\ifx\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @reheight\endcsname\relax
    \repeat
@@ -170,6 +171,9 @@
 \define@key{pgfpagesuselayoutoption}{border shrink}%
 {\def\pgfpageoptionborder{#1}}
 
+\define@key{pgfpagesuselayoutoption}{border code}%
+{\def\pgfpageoptionbordercode{#1}}
+
 \define@key{pgfpagesuselayoutoption}{corner width}%
 {\def\pgfpageoptioncornerwidth{#1}}
 
@@ -221,6 +225,9 @@
   {%
     logical pages=1
   }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
+  }
   \pgfpageslogicalpageoptions{1}
   {%
     center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight},%
@@ -231,6 +238,7 @@
 \pgfpagesdeclarelayout{resize to}
 {
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
 }
 {
   \pgfpagesphysicalpageoptions
@@ -238,6 +246,9 @@
     logical pages=1,%
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \pgfpageslogicalpageoptions{1}
   {%
@@ -257,6 +268,9 @@
     physical height=\pgfpageoptiontwoheight,%
     physical width=\pgfpageoptiontwowidth,%
     last logical shipout=1,%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \pgfpageslogicalpageoptions{1}
   {%
@@ -279,6 +293,9 @@
     physical width=\pgfpageoptiontwowidth,%
     last logical shipout=1%
   }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
+  }
   \pgfpageslogicalpageoptions{1}
   {%
     center=\pgfpageoptionfirstcenter,%
@@ -295,6 +312,7 @@
   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
   \def\pgfpageoptionfirstshipout{1}
 }
 {
@@ -304,6 +322,9 @@
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -346,6 +367,7 @@
   \edef\pgfpageoptionheight{\the\paperheight} 
   \edef\pgfpageoptionwidth{\the\paperwidth}
   \edef\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
 }
 {
   \pgfpagesphysicalpageoptions
@@ -353,6 +375,9 @@
     logical pages=4,%
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \pgfpageslogicalpageoptions{1}
   {%
@@ -390,6 +415,7 @@
   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
 }
 {
   \pgfpagesphysicalpageoptions
@@ -397,6 +423,9 @@
     logical pages=8,%
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -523,6 +552,7 @@
   \edef\pgfpageoptionheight{\the\paperheight} 
   \edef\pgfpageoptionwidth{\the\paperwidth}
   \edef\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
 }
 {
   \pgfpagesphysicalpageoptions
@@ -530,6 +560,9 @@
     logical pages=16,%
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \pgfpageslogicalpageoptions{1}
   {%
@@ -647,9 +680,10 @@
 
 \pgfpagesdeclarelayout{4 on 2, odd then even}%
 {%
-   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
+  \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
   \def\pgfpageoptionfirstshipout{1}
 }%
 {%
@@ -657,9 +691,12 @@
   {%
     logical pages=4,%
     physical pages=2,%
-     physical height=\pgfpageoptionheight,%
+    physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -678,7 +715,7 @@
       resized height=\pgfphysicalheight,%
       center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{1}{}
+  \pgfpagesphysicalpage{2}{}
     \pgfpageslogicalpageoptions{2}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -733,6 +770,7 @@
    \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
   \def\pgfpageoptionfirstshipout{1}
 }%
 {%
@@ -743,6 +781,9 @@
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -761,7 +802,7 @@
       resized height=\pgfphysicalheight,%
       center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
     }%
-  \pgfpagesphysicalpage{2}{}
+  \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{2}
     {%
       border shrink=\pgfpageoptionborder,%
@@ -816,6 +857,7 @@
    \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
   \def\pgfpageoptionfirstshipout{1}
 }%
 {%
@@ -826,6 +868,9 @@
      physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
   \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -901,6 +946,7 @@
   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
   \def\pgfpageoptionfirstshipout{1}
 }%
 {%
@@ -911,6 +957,9 @@
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
 %  \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -986,6 +1035,7 @@
   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionbordercode{}
   \def\pgfpageoptionfirstshipout{1}
 }%
 {%
@@ -996,6 +1046,9 @@
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults{%
+    border code=\pgfpageoptionbordercode
   }
 %  \ifdim\paperheight>\paperwidth\relax
     % put side-by-side
@@ -1075,6 +1128,7 @@
   \edef\pgfpageoptionwidth{\the\paperheight}
   \def\pgfpageoptionborder{0pt}
   \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{\pgfusepath{draw}}
 }%
 {%
   \pgfpagesphysicalpageoptions
@@ -1089,7 +1143,7 @@
     border shrink=\pgfpageoptionborder,%
     resized width=\the\paperwidth,%
     resized height=\the\paperheight,%
-    border code=\pgfusepath{draw}
+    border code=\pgfpageoptionbordercode
   }
   \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
