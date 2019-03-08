@@ -50,6 +50,21 @@ To choose a layout, use:
 exactly as for `pgfpages`.  The layouts for `pgfpages` are available for
 `pgfmorepages` as are several new ones.
 
+## Layout Options
+
+I've added another option to the set of keys that can be specified in
+the layout command:
+
+~~~
+\pgfpagesuselayout{2 on 1}[border code=\pgfusepath{draw}]
+~~~
+
+When `pgf(more)pages` sets up a logical page, it puts a rectangle path
+around it.
+The layout specification can use that path in some way.
+This option exposes that to the user at call time as well (providing
+the layout specification allows for it, most have been adapted to do so).
+
 # Predefined Layouts
 
 The available layouts are as follows.
@@ -64,6 +79,7 @@ These are from the original `pgfpages` package:
 * `two screens with optional second`
 * `2 on 1`
 * `4 on 1`
+* `6 on 1`
 * `8 on 1`
 * `16 on 1`
 
