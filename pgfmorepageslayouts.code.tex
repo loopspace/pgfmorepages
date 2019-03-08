@@ -4,6 +4,7 @@
   \edef\pgfpageoptionwidth{\the\paperwidth}
   \def\pgfpageoptionborder{0pt}
   \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{}
 }%
 {%
   \pgfpagesphysicalpageoptions
@@ -13,6 +14,10 @@
     physical height=\pgfpageoptionheight,%
     physical width=\pgfpageoptionwidth,%
     current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagessetdefaults
+  {%
+    border code=\pgfpageoptionbordercode
   }
   \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
@@ -51,6 +56,7 @@
   \edef\pgfpageoptionwidth{\the\paperwidth}
   \def\pgfpageoptionborder{0pt}
   \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{}
 }%
 {%
   \pgfpagesphysicalpageoptions
@@ -66,6 +72,7 @@
     border shrink=\pgfpageoptionborder,%
     resized width=.5\pgfphysicalheight,%
     resized height=\pgfphysicalwidth,%
+    border code=\pgfpageoptionbordercode
 %    border code=\pgfusepath{draw}
   }
   \pgfpagesphysicalpage{1}{}
@@ -87,6 +94,7 @@
   \edef\pgfpageoptionwidth{\the\paperwidth}
   \def\pgfpageoptionborder{0pt}
   \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{}
 }%
 {%
   \pgfpagesphysicalpageoptions
@@ -102,6 +110,7 @@
     border shrink=\pgfpageoptionborder,%
     resized width=.5\pgfphysicalwidth,%
     resized height=.5\pgfphysicalheight,%
+    border code=\pgfpageoptionbordercode
 %    border code=\pgfusepath{draw}
   }
   \pgfpagesphysicalpage{1}{}
@@ -129,8 +138,13 @@
   \edef\pgfpageoptionwidth{\the\paperwidth}
   \def\pgfpageoptionborder{0pt}
   \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{}
 }%
 {%
+  \pgfpagessetdefaults
+  {%
+    border code=\pgfpageoptionbordercode
+  }
   \pgfpagesphysicalpageoptions
   {%
     logical pages=1,%
