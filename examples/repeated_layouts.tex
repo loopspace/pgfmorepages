@@ -1,0 +1,134 @@
+\documentclass{article}
+\pagestyle{empty}
+\thispagestyle{empty}
+\usepackage{pgfmorepages}
+\pgfmorepagesloadextralayouts
+
+\usepackage{tikz}
+
+\begin{document}
+\Huge\centering
+
+\pgfpagesuselayout{1 repeated 4 times on 1}[border shrink=1cm,border code=\pgfusepath{draw}]%[a4paper]
+
+\vspace*{\fill}
+1 repeated 4 times on 1
+\vspace*{\fill}
+
+\newpage
+\pgfpagesuselayout{repeated 2-up}[border shrink=1cm,border code=\pgfusepath{draw}]%[a4paper]
+
+\vspace*{\fill}
+repeated 2-up
+\vspace*{\fill}
+
+\newpage
+
+\pgfpagesuselayout{repeated 4-up}[border shrink=1cm,border code=\pgfusepath{draw}]%[a4paper]
+
+\vspace*{\fill}
+repeated 4-up
+\vspace*{\fill}
+
+\newpage
+
+\pgfpagesuselayout{1 on 1}[border shrink=1cm,border code=\pgfusepath{draw}]
+
+\vspace*{\fill}
+1 on 1
+\vspace*{\fill}
+
+\newpage
+
+\pgfpagesuselayout{2 on 1}[border shrink=1cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,2} {
+\vspace*{\fill}
+2 on 1 (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{4 on 1}[border shrink=1cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,4} {
+\vspace*{\fill}
+4 on 1 (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+
+\pgfpagesuselayout{8 on 1}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,8} {
+\vspace*{\fill}
+8 on 1 (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{16 on 1}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,16} {
+\vspace*{\fill}
+16 on 1 (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{4 on 2, odd then even}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,4} {
+\vspace*{\fill}
+4 on 2, odd then even (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{4 on 2, even then odd}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,4} {
+\vspace*{\fill}
+4 on 2, even then odd (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{4 on 2, book format}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,4} {
+\vspace*{\fill}
+4 on 2, book format (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{8 on 4, book format}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,8} {
+\vspace*{\fill}
+8 on 4, book format (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\pgfpagesuselayout{8 on 4, book format, reverse second, single sided}[border shrink=.25cm,border code=\pgfusepath{draw}]
+
+\foreach \k in {1,...,8} {
+\vspace*{\fill}
+8 on 4, book format, reverse second, single sided (page \k)
+\vspace*{\fill}
+
+\newpage
+}
+
+\end{document}
