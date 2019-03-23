@@ -83,9 +83,10 @@ These are from the original `pgfpages` package:
 * `8 on 1`
 * `16 on 1`
 
-## PGFMorePages
+## Extra Layouts
 
-These are loaded by default:
+These are loaded via the command
+`\pgfmorepagesloadextralayouts`:
 
 * `4 on 2, odd then even`
 * `4 on 2, even then odd`
@@ -93,12 +94,6 @@ These are loaded by default:
 * `8 on 4, book format`
 * `8 on 4, book format, reverse second, single sided`
 * `5 index cards`
-
-## Extra Layouts
-
-These are loaded via the command
-`\pgfmorepagesloadextralayouts`:
-
 * `1 repeated 4 times on 1`
 * `repeated 2-up`
 * `repeated 4-up`

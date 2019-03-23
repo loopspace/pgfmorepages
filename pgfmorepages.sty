@@ -1,5 +1,5 @@
 % Original code copyright 2006 by Till Tantau
-% Extension copyright 2012 by Andrew Stacey
+% Extension copyright 2012-2019 by Andrew Stacey
 %
 % This file may be distributed and/or modified
 %
@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackage{pgfmorepages}[2012/06/07 ver 0.01]
+\ProvidesPackage{pgfmorepages}[2019/03/22 ver 1.00]
 
 \@ifpackageloaded{pgfpages}{%
   \PackageWarning{pgfmorepages}{I notice that the package "pgfpages" has already been loaded.  This is an extension of that package and redefines various internal pieces so the two should not be used together.}
@@ -48,7 +48,6 @@
 \pgfphysicalpageemptytrue
 \pgf@holdingphysicalpagefalse
 
-
 % Define a layout
 %
 % #1 = layout name
@@ -62,7 +61,10 @@
 %    \pgfpageslogicalpageoptions{1}{resized width=\pgfphysicalwidth,%
 %      resized height=\pgfphysicalheight,center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight}}}
 
+\let\pgfpages@layouts=\pgfutil@gobble
+
 \newcommand\pgfpagesdeclarelayout[3]{
+  \expandafter\def\expandafter\pgfpages@layouts\expandafter{\pgfpages@layouts, #1}
   \expandafter\newcommand\csname pgfpages@layoutbefore@#1\endcsname{#2}
   \expandafter\newcommand\csname pgfpages@layout@#1\endcsname{#3}}
 
@@ -79,7 +81,7 @@
 \def\pgfpagesuselayout#1{\pgfutil@ifnextchar[{\pgf@pagelayout{#1}}{\pgf@pagelayout{#1}[]}}
 \def\pgf@pagelayout#1[#2]{
   \pgfutil@ifundefined{pgfpages@layout@#1}{
-    \PackageError{pgfpages}{Page layout `#1' undefined.}{}
+    \PackageError{pgfmorepages}{Page layout `#1' undefined.  Currently defined layouts are: \pgfpages@layouts \pgfmorepages@extramessage}{}
   }
   {
     \pgfpages@reset
@@ -960,353 +962,12 @@
   \fi    
 }
 
-\pgfpagesdeclarelayout{4 on 2, book format}%
-{%
-   \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
-  \edef\pgfpageoptionwidth{\the\paperheight}
-  \def\pgfpageoptionborder{0pt}
-  \def\pgfpageoptionbordercode{}
-  \def\pgfpageoptionfirstshipout{1}
-}%
-{%
-  \pgfpagesphysicalpageoptions
-  {%
-    logical pages=4,%
-    physical pages=2,%
-     physical height=\pgfpageoptionheight,%
-    physical width=\pgfpageoptionwidth,%
-    current logical shipout=\pgfpageoptionfirstshipout%
-  }
-  \pgfpagessetdefaults{%
-    border code=\pgfpageoptionbordercode
-  }
-  \ifdim\paperheight>\paperwidth\relax
-    % put side-by-side
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{4}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{2}{}
-    \pgfpageslogicalpageoptions{3}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{2}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \else
-    % stack on top of one another
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{4}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.5\pgfphysicalwidth}{.75\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{2}{}
-    \pgfpageslogicalpageoptions{3}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{2}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.5\pgfphysicalwidth}{.75\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{2}{}
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.5\pgfphysicalwidth}{.25\pgfphysicalheight}%
-    }%
-  \fi    
-}
-
-\pgfpagesdeclarelayout{8 on 4, book format}%
-{%
-  \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
-  \edef\pgfpageoptionwidth{\the\paperheight}
-  \def\pgfpageoptionborder{0pt}
-  \def\pgfpageoptionbordercode{}
-  \def\pgfpageoptionfirstshipout{1}
-}%
-{%
-  \pgfpagesphysicalpageoptions
-  {%
-    logical pages=8,%
-    physical pages=4,%
-    physical height=\pgfpageoptionheight,%
-    physical width=\pgfpageoptionwidth,%
-    current logical shipout=\pgfpageoptionfirstshipout%
-  }
-  \pgfpagessetdefaults{%
-    border code=\pgfpageoptionbordercode
-  }
-%  \ifdim\paperheight>\paperwidth\relax
-    % put side-by-side
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{8}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{2}{}
-    \pgfpageslogicalpageoptions{7}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{2}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{3}{}
-    \pgfpageslogicalpageoptions{6}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{4}{}
-    \pgfpageslogicalpageoptions{5}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{4}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{3}{}
-    \pgfpageslogicalpageoptions{3}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-%  \else
-    % stack on top of one another
-%  \fi    
-}
-
-\pgfpagesdeclarelayout{8 on 4, book format, reverse second, single sided}%
-{%
-  \edef\pgfpageoptionheight{\the\paperwidth} % landscaped by default
-  \edef\pgfpageoptionwidth{\the\paperheight}
-  \def\pgfpageoptionborder{0pt}
-  \def\pgfpageoptionbordercode{}
-  \def\pgfpageoptionfirstshipout{1}
-}%
-{%
-  \pgfpagesphysicalpageoptions
-  {%
-    logical pages=8,%
-    physical pages=4,%
-    physical height=\pgfpageoptionheight,%
-    physical width=\pgfpageoptionwidth,%
-    current logical shipout=\pgfpageoptionfirstshipout%
-  }
-  \pgfpagessetdefaults{%
-    border code=\pgfpageoptionbordercode
-  }
-%  \ifdim\paperheight>\paperwidth\relax
-    % put side-by-side
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{8}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{4}{}
-    \pgfpageslogicalpageoptions{7}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight},%
-      rotation=180%
-    }%
-    \pgfpageslogicalpageoptions{2}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight},%
-      rotation=180%
-    }%
-  \pgfpagesphysicalpage{2}{}
-    \pgfpageslogicalpageoptions{6}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{3}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight}%
-    }%
-  \pgfpagesphysicalpage{3}{}
-    \pgfpageslogicalpageoptions{5}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.5\pgfphysicalheight},%
-      rotation=180%
-    }%
-    \pgfpageslogicalpageoptions{4}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.5\pgfphysicalheight},%
-      rotation=180%
-    }%
-%  \else
-    % stack on top of one another
-%  \fi    
-}
-
-
-\pgfpagesdeclarelayout{5 index cards}
-{%
-  \edef\pgfpageoptionheight{\the\paperwidth}
-  \edef\pgfpageoptionwidth{\the\paperheight}
-  \def\pgfpageoptionborder{0pt}
-  \def\pgfpageoptionfirstshipout{1}
-  \def\pgfpageoptionbordercode{\pgfusepath{draw}}
-}%
-{%
-  \pgfpagesphysicalpageoptions
-  {%
-    logical pages=10,%
-    physical pages=2,%
-    physical height=\pgfpageoptionheight,%
-    physical width=\pgfpageoptionwidth,%
-    current logical shipout=\pgfpageoptionfirstshipout%
-  }
-  \pgfpagessetdefaults{%
-    border shrink=\pgfpageoptionborder,%
-    resized width=\the\paperwidth,%
-    resized height=\the\paperheight,%
-    border code=\pgfpageoptionbordercode
-  }
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{1}
-    {%
-      center=\pgfpoint{.5\paperwidth}{.75*\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{3}
-    {%
-      center=\pgfpoint{.5\paperwidth}{.25*\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{5}
-    {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{\pgfphysicalheight - .5\paperheight},%
-    }%
-    \pgfpageslogicalpageoptions{7}
-    {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{.5\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{9}
-    {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{.5\paperheight},%
-    }%
-  \pgfpagesphysicalpage{2}{}
-    \pgfpageslogicalpageoptions{2}
-    {%
-      center=\pgfpoint{\pgfphysicalwidth - .5\paperwidth}{.75\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{4}
-    {%
-      center=\pgfpoint{\pgfphysicalwidth - .5\paperwidth}{.25\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{6}
-    {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth - \paperwidth)}{\pgfphysicalheight - .5\paperheight},%
-    }%
-    \pgfpageslogicalpageoptions{8}
-    {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth - \paperwidth)}{.5\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{10}
-    {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth - \paperwidth)}{.5\paperheight},%
-    }%
-}
-
 % Load more layouts
 
+\def\pgfmorepages@extramessage{.  Extra layouts can be loaded with the command \string\pgfmorepagesloadextralayouts}
 \newcommand\pgfmorepagesloadextralayouts{%
   \input{pgfmorepageslayouts.code.tex}%
+  \def\pgfmorepages@extramessage{}%
 }
 
 % Change/set main option
