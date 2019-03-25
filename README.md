@@ -94,14 +94,13 @@ These are loaded via the command
 * `8 on 4, book format`
 * `8 on 4, book format, reverse second, single sided`
 * `5 index cards`
-* `1 repeated 4 times on 1`
 * `repeated 2-up`
 * `repeated 4-up`
 * `1 on 1`
+* `discard`
 
-(NB `1 repeated 4 times on 1` and `repeated 4-up` appear to do the
-same thing.  They were defined at different times and are implemented
-slightly differently so I can't be *absolutely* sure.)
+NB There used to be a layout called `1 repeated 4 times on 1`.
+Use `repeated 4-up` instead.
 
 # Examples
 
@@ -122,4 +121,36 @@ slightly differently so I can't be *absolutely* sure.)
 	\usepackage{pgfmorepages}
 	\pgfmorepagesloadextralayouts
 	\pgfpagesuselayout{repeated 4-up}[a4paper]
+	~~~
+
+3. Use `1 on 1` to reset back to "normal".
+
+    ~~~
+	\documentclass{article}
+	\usepackage[a6paper]{geometry}
+	\usepackage{pgfmorepages}
+	\pgfmorepagesloadextralayouts
+	\pgfpagesuselayout{repeated 4-up}[a4paper]
+	\begin{document}
+	Some stuff taking a few pages that will be repeated.
+	\newpage
+	\pgfpagesuselayout{1 on 1}
+	Back to one logical page per physical page.
+	\end{document}
+	~~~
+
+4. Use `discard` to ignore whole pages
+
+    ~~~
+	\documentclass{article}
+	\usepackage[a6paper]{geometry}
+	\usepackage{pgfmorepages}
+	\pgfmorepagesloadextralayouts
+	\pgfpagesuselayout{discard}
+	\begin{document}
+	Some stuff taking a few pages that will be ignored.
+	\newpage
+	\pgfpagesuselayout{1 on 1}
+	Back to one logical page per physical page.
+	\end{document}
 	~~~

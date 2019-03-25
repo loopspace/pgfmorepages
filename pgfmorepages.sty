@@ -96,13 +96,18 @@
 \pgfphysicalheight=\paperheight
 \pgfphysicalwidth=\paperwidth
   \pgf@cppn=1\relax%
-  \loop%
+    \loop%
+    \expandafter\let\csname pgfpages@lp@\the\pgf@cppn @skipcode\endcsname\relax
+    \expandafter\let\csname pgfpages@lp@\the\pgf@cppn @height\endcsname\relax
+    \expandafter\let\csname pgfpages@lp@\the\pgf@cppn @width\endcsname\relax
+    \expandafter\let\csname pgfpages@lp@\the\pgf@cppn @copy\endcsname\relax
     \expandafter\let\csname pgf@lpageson@\the\pgf@cppn\endcsname=\relax
     \advance \pgf@cppn by 1\relax%  
    \expandafter\unless\expandafter\ifx\csname pgf@lpageson@\the\pgf@cppn\endcsname\relax%
   \repeat%
   \pgf@clpn=1\relax%
   \loop%
+    \expandafter\let\csname pgfpages@pp@\the\pgf@clpn @skipcode\endcsname\relax
     \expandafter\let\csname pgfpages@box@\the\pgf@clpn\endcsname=\relax
     \advance \pgf@clpn by 1\relax%  
    \expandafter\unless\expandafter\ifx\csname pgfpages@box@\the\pgf@clpn\endcsname\relax%
@@ -114,8 +119,14 @@
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @reheight\endcsname\relax
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @rewidth\endcsname\relax
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @border\endcsname\relax
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @bordercode\endcsname\relax
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @center\endcsname\relax
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @cornerwidth\endcsname\relax
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @scale\endcsname\relax%
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @xscale\endcsname\relax%
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @yscale\endcsname\relax%
       \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @rotation\endcsname\relax%
+      \expandafter\let\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @skipcode\endcsname\relax%
       \advance\pgf@clpn by 1\relax
    \expandafter\unless\expandafter\ifx\csname pgfpages@p@\the\pgf@clpn @\the\pgf@cppn @reheight\endcsname\relax
    \repeat

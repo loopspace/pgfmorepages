@@ -341,58 +341,6 @@
     }%
 }
 
-\pgfpagesdeclarelayout{1 repeated 4 times on 1}
-{%
-  \edef\pgfpageoptionheight{\the\paperheight}
-  \edef\pgfpageoptionwidth{\the\paperwidth}
-  \def\pgfpageoptionborder{0pt}
-  \def\pgfpageoptionfirstshipout{1}
-  \def\pgfpageoptionbordercode{}
-}%
-{%
-  \pgfpagesphysicalpageoptions
-  {%
-    logical pages=1,%
-    physical pages=1,%
-    physical height=\pgfpageoptionheight,%
-    physical width=\pgfpageoptionwidth,%
-    current logical shipout=\pgfpageoptionfirstshipout%
-  }
-  \pgfpagessetdefaults
-  {%
-    border code=\pgfpageoptionbordercode
-  }
-  \pgfpagesphysicalpage{1}{}
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.75\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.75\pgfphysicalheight}%
-    }%
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.25\pgfphysicalwidth}{.25\pgfphysicalheight},%
-    }%
-    \pgfpageslogicalpageoptions{1}
-    {%
-      border shrink=\pgfpageoptionborder,%
-      resized width=.5\pgfphysicalwidth,%
-      resized height=.5\pgfphysicalheight,%
-      center=\pgfpoint{.75\pgfphysicalwidth}{.25\pgfphysicalheight},%
-    }%
-}
-
 \pgfpagesdeclarelayout{repeated 2-up}%
 {%
   \edef\pgfpageoptionheight{\the\paperwidth}
@@ -516,6 +464,40 @@
     current logical shipout=\pgfpageoptionfirstshipout%
   }
   \pgfpagesphysicalpage{1}{}
+    \pgfpageslogicalpageoptions{1}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=0
+    }%
+}
+
+\pgfpagesdeclarelayout{discard}
+{%
+  \edef\pgfpageoptionheight{\the\paperheight}
+  \edef\pgfpageoptionwidth{\the\paperwidth}
+  \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{}
+}%
+{%
+  \pgfpagessetdefaults
+  {%
+    border code=\pgfpageoptionbordercode
+  }
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=1,%
+    physical pages=1,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth,%
+    current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagesphysicalpage{1}{
+    skip code=\pgfpagesshipfalse
+  }
     \pgfpageslogicalpageoptions{1}
     {%
       border shrink=\pgfpageoptionborder,%

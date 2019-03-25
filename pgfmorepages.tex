@@ -9,7 +9,7 @@
 
 \title{PGF \emph{more} Pages}
 \author{Andrew Stacey \\ \texttt{loopspace@mathforge.org}}
-\date{\fileversion~ from \filedate}
+\date{\fileversion\ from \filedate}
 
 \begin{document}
 
@@ -79,10 +79,10 @@ The \Verb+pgfmorepages+ defines some extra layouts, which require the following 
 \item \Verb+8 on 4, book format+
 \item \Verb+8 on 4, book format, reverse second, single sided+
 \item \Verb+5 index cards+
-\item \Verb+1 repeated 4 times on 1+
 \item \Verb+repeated 2-up+
 \item \Verb+repeated 4-up+
 \item \Verb+1 on 1+
+\item \Verb+discard+
 \end{itemize}
 
 To use a layout, use the command:
@@ -91,32 +91,34 @@ To use a layout, use the command:
 \pgfpagesuselayout{<layout name>}[<optional arguments>]
 \end{verbatim}
 
+
+
 \subsection{Options}
 
 The optional arguments are a superset of the ones that \Verb+pgfpages+ allows.
 
 \begin{itemize}
-\item physical paper width
-\item physical paper height
-\item a0paper
-\item a1paper
-\item a2paper
-\item a3paper
-\item a4paper
-\item a5paper
-\item a6paper
-\item letterpaper
-\item legalpaper
-\item executivepaper
-\item landscape
-\item border shrink
-\item border code
-\item corner width
-\item odd numbered pages right
-\item second right
-\item second left
-\item second top
-\item second bottom
+\item \Verb+physical paper width+
+\item \Verb+physical paper height+
+\item \Verb+a0paper+
+\item \Verb+a1paper+
+\item \Verb+a2paper+
+\item \Verb+a3paper+
+\item \Verb+a4paper+
+\item \Verb+a5paper+
+\item \Verb+a6paper+
+\item \Verb+letterpaper+
+\item \Verb+legalpaper+
+\item \Verb+executivepaper+
+\item \Verb+landscape+
+\item \Verb+border shrink+
+\item \Verb+border code+
+\item \Verb+corner width+
+\item \Verb+odd numbered pages right+
+\item \Verb+second right+
+\item \Verb+second left+
+\item \Verb+second top+
+\item \Verb+second bottom+
 \end{itemize}
 
 The only additional option is \Verb+border code+ which, if the layout does anything with it, is designed for passing a command to the layout for the border path.
@@ -127,7 +129,7 @@ This makes it easy to switch between those (providing the layout supports it).
 
 The documentation for \Verb+pgfpages+ states that it is possible to change layout mid-document.
 This turns out not to be correct for \Verb+pgfpages+ as it doesn't reset everything correctly.
-\Verb+pgfmorepages+ fixes this.
+\Verb+pgfmorepages+ fixes this\footnote{Or tries to -- I keep discovering new options that I haven't reset properly.}.
 It is best practice to use a \Verb+\newpage+ or \Verb+\clearpage+ before doing so.
 The layout \Verb+1 on 1+ is useful here as it sets the layout back to one logical page on one physical page.
 
