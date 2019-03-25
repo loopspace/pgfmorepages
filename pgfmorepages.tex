@@ -74,15 +74,147 @@ The \Verb+pgfmorepages+ defines some extra layouts, which require the following 
 
 \begin{itemize}
 \item \Verb+4 on 2, odd then even+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(1\)};
+\node at (1,0) {\(3\)};
+\node at (3,0) {\(2\)};
+\node at (4,0) {\(4\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
 \item \Verb+4 on 2, even then odd+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(2\)};
+\node at (1,0) {\(4\)};
+\node at (3,0) {\(1\)};
+\node at (4,0) {\(3\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
 \item \Verb+4 on 2, book format+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(4\)};
+\node at (1,0) {\(1\)};
+\node at (3,0) {\(2\)};
+\node at (4,0) {\(3\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
 \item \Verb+8 on 4, book format+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(8\)};
+\node at (1,0) {\(1\)};
+\node at (3,0) {\(2\)};
+\node at (4,0) {\(7\)};
+\node at (6,0) {\(6\)};
+\node at (7,0) {\(3\)};
+\node at (9,0) {\(4\)};
+\node at (10,0) {\(5\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (6,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (7,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (9,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (10,0)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
 \item \Verb+8 on 4, book format, reverse second, single sided+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(8\)};
+\node at (1,0) {\(1\)};
+\node at (3,0) {\(6\)};
+\node at (4,0) {\(3\)};
+\node[rotate=180] at (6,0) {\(5\)};
+\node[rotate=180] at (7,0) {\(4\)};
+\node[rotate=180] at (9,0) {\(7\)};
+\node[rotate=180] at (10,0) {\(2\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (6,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (7,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (9,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (10,0)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
+
 \item \Verb+5 index cards+
 \item \Verb+repeated 2-up+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(1\)};
+\node at (1,0) {\(1\)};
+\node at (3,0) {\(2\)};
+\node at (4,0) {\(2\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
 \item \Verb+repeated 4-up+
+
+\begin{center}
+\begin{tikzpicture}
+\node at (0,0) {\(1\)};
+\node at (1,0) {\(1\)};
+\node at (0,1.4) {\(1\)};
+\node at (1,1.4) {\(1\)};
+\node at (3,0) {\(2\)};
+\node at (4,0) {\(2\)};
+\node at (3,1.4) {\(2\)};
+\node at (4,1.4) {\(2\)};
+\draw (-.5,-.7) rectangle (.5,.7);
+\draw (1,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,0)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (0,1.4)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (1,1.4)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (3,1.4)  +(-.5,-.7) rectangle +(.5,.7);
+\draw (4,1.4)  +(-.5,-.7) rectangle +(.5,.7);
+\end{tikzpicture}
+\end{center}
+
+
 \item \Verb+1 on 1+
+
+This is a layout that ``resets'' the mechanism back to one logical page on one physical page.
+It still uses the mechanics of the \Verb+pgfmorepages+ package so is not quite the same as removing it altogether, but is effectively the same.
+
 \item \Verb+discard+
+
+This layout discards all its pages.
+Useful to remove pages from a document without changing the source file too much.
+
 \end{itemize}
 
 To use a layout, use the command:
