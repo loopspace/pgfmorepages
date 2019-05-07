@@ -63,10 +63,14 @@
 
 \let\pgfpages@layouts=\pgfutil@gobble
 
-\newcommand\pgfpagesdeclarelayout[3]{
+\newcommand\pgfpagesdeclarelayout[3]{%
+  \pgfutil@ifundefined{pgfpages@layout@#1}{%
   \expandafter\def\expandafter\pgfpages@layouts\expandafter{\pgfpages@layouts, #1}
   \expandafter\newcommand\csname pgfpages@layoutbefore@#1\endcsname{#2}
-  \expandafter\newcommand\csname pgfpages@layout@#1\endcsname{#3}}
+    \expandafter\newcommand\csname pgfpages@layout@#1\endcsname{#3}
+  }{%
+    \PackageWarning{pgfmorepages}{Layout #1 already defined}%
+  }}
 
 
 % Use a layout
