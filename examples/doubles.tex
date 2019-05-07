@@ -1,0 +1,37 @@
+\documentclass[a5paper]{article}
+\usepackage{pgfmorepages}
+\usepackage{booktabs}
+\pgfmorepagesloadextralayouts
+\begin{document}
+
+\begin{tabular}{llll}
+\toprule
+Layout & Logical & Physical & Result \\ \midrule
+2 on 1 & a5 portrait & a4 landscape & 2p on 1l \\
+repeated 2-up & a5 portrait & a4 landscape & 2p rotated on 1l \\
+2 on 1 & a5 portrait & a4 portrait & 2p on 1p \\
+repeated 2-up & a5 portrait & a4 portrait & 2p rotated on 1p \\
+2 on 1 & a5 landscape & a4 portrait & 2l on 1p \\
+repeated 2-up & a5 landscape & a4 portrait & 2l rotated on 1p \\
+\\\bottomrule
+\end{tabular}
+
+\clearpage
+\pgfpagesuselayout{2 on 1}[
+  a4paper,
+  landscape,
+  border code=\pgfusepath{draw}
+]
+Page 1
+\clearpage
+Page 2
+\clearpage
+\pgfpagesuselayout{repeated 2-up}[
+  a4paper,
+  landscape,
+  border code=\pgfusepath{draw}
+]
+Page 1
+\clearpage
+Page 2
+\end{document}

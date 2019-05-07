@@ -1,13 +1,17 @@
 \documentclass{article}
-\usepackage[paperheight=4.75in,paperwidth=2.75in]{geometry}
+%\usepackage[paperheight=4.75in,paperwidth=2.75in]{geometry}
+\pagestyle{empty}
+\thispagestyle{empty}
 \usepackage{pgfmorepages}
-\usepackage{lipsum}
-
-  \message{got here}%
-\pgfpagesuselayout{5 index cards}[a4paper]
-  \message{and here}%
+\usepackage{tikz}
 
 \begin{document}
-\small
-\lipsum[1-20]
+\pgfpagesuselayout{repeated 2-up}[a4paper]
+
+\foreach \k in {1,...,10} {
+  \tikz[overlay,remember picture] \node[scale=10] at (current page.center) {\k};
+
+  \newpage
+}
+
 \end{document}

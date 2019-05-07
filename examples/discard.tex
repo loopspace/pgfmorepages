@@ -1,0 +1,57 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usepackage{pgfmorepages}
+\pgfmorepagesloadextralayouts
+
+\pgfpagesdeclarelayout{discard}
+{%
+  \edef\pgfpageoptionheight{\the\paperheight}
+  \edef\pgfpageoptionwidth{\the\paperwidth}
+  \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionfirstshipout{1}
+  \def\pgfpageoptionbordercode{}
+}%
+{%
+  \pgfpagessetdefaults
+  {%
+    border code=\pgfpageoptionbordercode
+  }
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=1,%
+    physical pages=1,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth,%
+    current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagesphysicalpage{1}{
+    skip code=\pgfpagesshipfalse
+  }
+    \pgfpageslogicalpageoptions{1}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=\pgfphysicalwidth,%
+      resized height=\pgfphysicalheight,%
+      center=\pgfpoint{.5\pgfphysicalwidth}{.5\pgfphysicalheight},%
+      rotation=0
+    }%
+  
+}
+
+\begin{document}
+
+\pgfpagesuselayout{discard}
+  
+\begin{tikzpicture}[remember picture,overlay]
+\node[font=\Huge] at (current page.center) {Page \thepage};
+\end{tikzpicture}
+
+\newpage
+\pgfpagesuselayout{1 on 1}
+
+\begin{tikzpicture}[remember picture,overlay]
+\node[font=\Huge] at (current page.center) {Page \thepage};
+\end{tikzpicture}
+
+\end{document}
