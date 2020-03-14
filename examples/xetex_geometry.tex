@@ -1,0 +1,140 @@
+\documentclass[9pt,a5paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+
+\usepackage{lipsum}
+
+\usepackage{geometry}
+\geometry{paperwidth=14.013333333333334cm,paperheight=7.4325cm,margin=0.5cm,bottom=0cm}
+
+
+\usepackage{pgfmorepages}
+
+%%%%%%%%%%PGFPAGES%%%%%%%%%%%%%%%%%%%%%%
+\pgfpagesdeclarelayout{12 on 1, book format}% 
+{
+ \edef\pgfpageoptionheight{\the\paperwidth}
+ \edef\pgfpageoptionwidth{\the\paperheight}
+ \def\pgfpageoptionborder{0pt}
+ \def\pgfpageoptionbordercode{}
+ \def\pgfpageoptionfirstshipout{1}
+}
+{
+ \pgfpagesphysicalpageoptions
+ {
+    logical pages=1,
+    physical pages=1,
+    physical height=\pgfpageoptionheight,
+    physical width=\pgfpageoptionwidth,
+    current logical shipout=\pgfpageoptionfirstshipout
+  }
+  \pgfpagessetdefaults{
+    border code=\pgfpageoptionbordercode
+  }
+
+\pgfpagesphysicalpage{1}{}
+
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.16666666666666666\pgfphysicalwidth}{0.125\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.5\pgfphysicalwidth}{0.125\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.8333333333333334\pgfphysicalwidth}{0.125\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.16666666666666666\pgfphysicalwidth}{0.375\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.5\pgfphysicalwidth}{0.375\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.8333333333333334\pgfphysicalwidth}{0.375\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.16666666666666666\pgfphysicalwidth}{0.625\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.5\pgfphysicalwidth}{0.625\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.8333333333333334\pgfphysicalwidth}{0.625\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.16666666666666666\pgfphysicalwidth}{0.875\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.5\pgfphysicalwidth}{0.875\pgfphysicalheight}
+    }
+    
+\pgfpageslogicalpageoptions{1}
+    {
+      border shrink=\pgfpageoptionborder,
+      resized width=0.3333333333333333\pgfphysicalwidth,
+      resized height=\pgfphysicalheight,
+      center=\pgfpoint{0.8333333333333334\pgfphysicalwidth}{0.875\pgfphysicalheight}
+    }
+    
+}
+\pgfpagesuselayout{12 on 1, book format}[a3paper,landscape]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\lipsum[2-3]
+\end{document}

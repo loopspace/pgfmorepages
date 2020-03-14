@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackage{pgfmorepages}[2019/03/22 v1.00]
+\ProvidesPackage{pgfmorepages}[2019/03/22 v1.00 multiple page manipulation]
 
 \@ifpackageloaded{pgfpages}{%
   \PackageWarning{pgfmorepages}{I notice that the package "pgfpages" has already been loaded.  This is an extension of that package and redefines various internal pieces so the two should not be used together.}
@@ -83,19 +83,19 @@
 % \pgfpagesuselayout{resize to}[a4paper]
 
 \def\pgfpagesuselayout#1{\pgfutil@ifnextchar[{\pgf@pagelayout{#1}}{\pgf@pagelayout{#1}[]}}
-\def\pgf@pagelayout#1[#2]{
-  \pgfutil@ifundefined{pgfpages@layout@#1}{
-    \PackageError{pgfmorepages}{Page layout `#1' undefined.  Currently defined layouts are: \pgfpages@layouts \pgfmorepages@extramessage}{}
-  }
-  {
+\def\pgf@pagelayout#1[#2]{%
+  \pgfutil@ifundefined{pgfpages@layout@#1}{%
+    \PackageError{pgfmorepages}{Page layout `#1' undefined.  Currently defined layouts are: \pgfpages@layouts \pgfmorepages@extramessage}{}%
+  }%
+  {%
     \pgfpages@reset
     \csname pgfpages@layoutbefore@#1\endcsname
-    \setkeys{pgfpagesuselayoutoption}{#2}
+    \setkeys{pgfpagesuselayoutoption}{#2}%
     \csname pgfpages@layout@#1\endcsname
-  }
+  }%
 }
 
-\def\pgfpages@reset{
+\def\pgfpages@reset{%
 \pgfshipoutphysicalpage
 \pgfphysicalheight=\paperheight
 \pgfphysicalwidth=\paperwidth
@@ -1467,32 +1467,8 @@
 % \pgfsetupphysicalpagesizes
 
 \newcommand\pgfsetupphysicalpagesizes{%
-  % The following code was send to me by Rolf Niepraschk
-    \ifx\Gin@driver\pgfutil@empty\else%
-      \filename@parse{\Gin@driver}\@tempswafalse%
-      \def\reserved@a{dvips}%
-      \ifx\filename@base\reserved@a\@tempswatrue\fi%
-      \def\reserved@a{dvipdfm}%
-      \ifx\filename@base\reserved@a\@tempswatrue\fi%
-      \if@tempswa%
-        \AtBeginDvi{%
-          \special{papersize=\the\pgfphysicalwidth,\the\pgfphysicalheight}}%
-      \fi%
-      \def\reserved@a{pdftex}%
-      \ifx\filename@base\reserved@a
-        \pdfpagewidth\pgfphysicalwidth\pdfpageheight\pgfphysicalheight%
-      \fi%
-      \def\reserved@a{vtex}%
-      \ifx\filename@base\reserved@a
-        \mediawidth\pgfphysicalwidth\mediaheight\pgfphysicalheight%
-      \fi%
-      \def\reserved@a{luatex}%
-      \ifx\filename@base\reserved@a
-        \pagewidth\pgfphysicalwidth\pageheight\pgfphysicalheight%
-      \fi%
-    \fi
+  \pgfsys@global@papersize{\the\pgfphysicalwidth}{\the\pgfphysicalheight}%
 }
-
 
 %
 % Start/End setup

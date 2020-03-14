@@ -6,7 +6,7 @@
 \usepackage{tikz}
 
 \begin{document}
-\pgfpagesuselayout{repeated 2-up}[a4paper]
+\pgfpagesuselayout{2 on 1}[a4paper]
 
 \foreach \k in {1,...,10} {
   \tikz[overlay,remember picture] \node[scale=10] at (current page.center) {\k};
