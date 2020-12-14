@@ -1,11 +1,14 @@
 % Original code copyright 2006 by Till Tantau
-% Extension copyright 2012-2020 by Andrew Stacey
+% Extension copyright 2012-2019 by Andrew Stacey
 %
-% This file may be distributed and/or modified under
-% the LaTeX Project Public License
+% This file may be distributed and/or modified
 %
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackage{pgfmorepages}[2020/10/28 v1.21 multiple page manipulation]
+\ProvidesPackage{pgfmorepages}[2019/03/22 v1.00 multiple page manipulation]
 
 \@ifpackageloaded{pgfpages}{%
   \PackageWarning{pgfmorepages}{I notice that the package "pgfpages" has already been loaded.  This is an extension of that package and redefines various internal pieces so the two should not be used together.}
@@ -1354,12 +1357,10 @@
 %
 % \pgfhookintoshipout
 
-\ExplSyntaxOn
 \newcommand\pgfhookintoshipout{
-  \let\pgfpages@originalshipout=\tex_shipout:D
-  \let\tex_shipout:D=\pgfpages@interceptshipout
+  \let\pgfpages@originalshipout=\shipout
+  \let\shipout=\pgfpages@interceptshipout
 }
-\ExplSyntaxOff
 
 \def\pgfpages@interceptshipout{%
   \ifnum\pgf@shipoutnextto>0\relax
