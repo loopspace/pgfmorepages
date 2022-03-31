@@ -507,3 +507,84 @@
       rotation=0
     }%
 }
+
+\pgfpagesdeclarelayout{zine}
+{%
+  % landscape by default
+  \edef\pgfpageoptionheight{\the\paperwidth}
+  \edef\pgfpageoptionwidth{\the\paperheight}
+  \def\pgfpageoptionborder{0pt}
+  \def\pgfpageoptionfirstshipout{1}
+}%
+{%
+  \pgfpagesphysicalpageoptions
+  {%
+    logical pages=8,%
+    physical pages=1,%
+    physical height=\pgfpageoptionheight,%
+    physical width=\pgfpageoptionwidth,%
+    current logical shipout=\pgfpageoptionfirstshipout%
+  }
+  \pgfpagesphysicalpage{1}{}
+    \pgfpageslogicalpageoptions{1}
+  {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.125\pgfphysicalwidth}{.25\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{2}
+  {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.375\pgfphysicalwidth}{.25\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{3}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.625\pgfphysicalwidth}{.25\pgfphysicalheight},%
+    }%
+    \pgfpageslogicalpageoptions{4}
+    {%
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.875\pgfphysicalwidth}{.25\pgfphysicalheight},%
+    }%
+    \pgfpageslogicalpageoptions{8}
+    {%
+      rotation=180,
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.125\pgfphysicalwidth}{.75\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{7}
+  {%
+      rotation=180,
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.375\pgfphysicalwidth}{.75\pgfphysicalheight}%
+    }%
+    \pgfpageslogicalpageoptions{6}
+    {%
+      rotation=180,
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.625\pgfphysicalwidth}{.75\pgfphysicalheight},%
+    }%
+    \pgfpageslogicalpageoptions{5}
+    {%
+      rotation=180,
+      border shrink=\pgfpageoptionborder,%
+      resized width=.25\pgfphysicalwidth,%
+      resized height=.25\pgfphysicalheight,%
+      center=\pgfpoint{.875\pgfphysicalwidth}{.75\pgfphysicalheight},%
+    }%
+}
+
