@@ -98,6 +98,7 @@ These are loaded via the command
 * `repeated 4-up`
 * `1 on 1`
 * `discard`
+* `zine`
 
 NB There used to be a layout called `1 repeated 4 times on 1`.
 Use `repeated 4-up` instead.
