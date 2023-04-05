@@ -291,53 +291,65 @@
     resized height=\the\paperheight,%
     border code=\pgfpageoptionbordercode
   }
+  \def\pgfpagespagerotation{0}%
+  \ifdim\paperheight<\paperwidth\relax
+  \def\pgfpagespagerotation{90}%
+  \fi
+  \edef\pgfpagesbordersize{\dimexpr(\pgfphysicalwidth - \paperheight - \paperwidth)/3\relax}%
   \pgfpagesphysicalpage{1}{}
     \pgfpageslogicalpageoptions{1}
     {%
-      center=\pgfpoint{.5\paperwidth}{.75*\pgfphysicalheight},%
+      rotation=\pgfpagespagerotation,%
+      center=\pgfpoint{.5*min(\paperwidth,\paperheight)+\pgfpagesbordersize}{.75*\pgfphysicalheight},%
     }%
     \pgfpageslogicalpageoptions{3}
     {%
-      center=\pgfpoint{.5\paperwidth}{.25*\pgfphysicalheight},%
+      rotation=\pgfpagespagerotation,%
+      center=\pgfpoint{.5*min(\paperwidth,\paperheight)+\pgfpagesbordersize}{.25*\pgfphysicalheight},%
     }%
     \pgfpageslogicalpageoptions{5}
     {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{\pgfphysicalheight - .5\paperheight},%
+      rotation=-90+\pgfpagespagerotation,%
+      center=\pgfpoint{\pgfphysicalwidth - .5*max(\paperwidth,\paperheight)-\pgfpagesbordersize}{\pgfphysicalheight - .5*max(\paperwidth,\paperheight)},%
     }%
     \pgfpageslogicalpageoptions{7}
     {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{.5\pgfphysicalheight},%
+      rotation=-90+\pgfpagespagerotation,%
+      center=\pgfpoint{\pgfphysicalwidth - .5*max(\paperwidth,\paperheight)-\pgfpagesbordersize}{.5\pgfphysicalheight},%
     }%
     \pgfpageslogicalpageoptions{9}
     {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth + \paperwidth)}{.5\paperheight},%
+      rotation=-90+\pgfpagespagerotation,%
+      center=\pgfpoint{\pgfphysicalwidth - .5*max(\paperwidth,\paperheight)-\pgfpagesbordersize}{.5*max(\paperwidth,\paperheight)},%
     }%
   \pgfpagesphysicalpage{2}{}
+  \ifdim\paperheight<\paperwidth\relax
+  \def\pgfpagespagerotation{-90}%
+  \fi
     \pgfpageslogicalpageoptions{2}
     {%
-      center=\pgfpoint{\pgfphysicalwidth - .5\paperwidth}{.75\pgfphysicalheight},%
+      rotation=\pgfpagespagerotation,%
+      center=\pgfpoint{\pgfphysicalwidth - .5*min(\paperwidth,\paperheight)-\pgfpagesbordersize}{.75\pgfphysicalheight},%
     }%
     \pgfpageslogicalpageoptions{4}
     {%
-      center=\pgfpoint{\pgfphysicalwidth - .5\paperwidth}{.25\pgfphysicalheight},%
+      rotation=\pgfpagespagerotation,%
+      center=\pgfpoint{\pgfphysicalwidth - .5*min(\paperwidth,\paperheight)-\pgfpagesbordersize}{.25\pgfphysicalheight},%
     }%
     \pgfpageslogicalpageoptions{6}
     {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth - \paperwidth)}{\pgfphysicalheight - .5\paperheight},%
+      rotation=90+\pgfpagespagerotation,%
+      center=\pgfpoint{.5*max(\paperwidth,\paperheight)+\pgfpagesbordersize}{\pgfphysicalheight - .5*max(\paperwidth,\paperheight)},%
     }%
     \pgfpageslogicalpageoptions{8}
     {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth - \paperwidth)}{.5\pgfphysicalheight},%
+      rotation=90+\pgfpagespagerotation,%
+      center=\pgfpoint{.5*max(\paperwidth,\paperheight)+\pgfpagesbordersize}{.5\pgfphysicalheight},%
     }%
     \pgfpageslogicalpageoptions{10}
     {%
-      rotation=90,%
-      center=\pgfpoint{.5*(\pgfphysicalwidth - \paperwidth)}{.5\paperheight},%
+      rotation=90+\pgfpagespagerotation,%
+      center=\pgfpoint{.5*max(\paperwidth,\paperheight)+\pgfpagesbordersize}{.5*max(\paperwidth,\paperheight)},%
     }%
 }
 
